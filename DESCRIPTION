@@ -1,0 +1,17 @@
+Package: rincewind
+Title: Utilities for processing forecasts matrices
+Version: 0.0.1
+Authors@R: 
+    person(given = "Sangeeta",
+           family = "Bhatia",
+           role = c("aut", "cre"),
+           email = "s.bhatia@imperial.ac.uk"
+           )
+Description: This package contains utilitiy functions for processing forecasts matrices.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    purrr,
+    tibble,
+    tidyr
