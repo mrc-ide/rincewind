@@ -68,7 +68,7 @@ daily_to_weekly <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
 
       weekly_df <- tibble::rownames_to_column(
         weekly_df,
-        var = quantile
+        var = "quantile"
       )
 
       weekly_df <- tidyr::spread(
