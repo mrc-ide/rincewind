@@ -9,6 +9,10 @@ pool_predictions_weighted <- function(outputs, weights, nsim = 10000) {
     x = names(weights), nsim, replace = TRUE, prob = weights
   )
   n_1 <- table(n_1)
+  if (! all(models %in% names(n_1))) {
+    idx <- which(! models %in% names(n_1))
+    n_1[[models[idx]]] <- 0
+  }
   message("Number of times models picked ")
   message(paste(n_1, collapse = "\n"))
 
