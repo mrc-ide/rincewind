@@ -84,3 +84,17 @@ daily_to_weekly <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
   )
   out
 }
+
+
+assign_epidemic_phase <- function(rt) {
+
+  rt$phase <- dplyr::case_when(
+    rt$`97.5%` < 1 ~ "decline",
+    (rt$`97.5%` - rt$`2.5%` > 1)  ~ "unclear",
+    (rt$`2.5%` > 1 &
+     ((rt$`97.5%` - rt$`2.5%`) < 1))  ~ "growing",
+    (rt$`2.5%` < 1 &
+     ((rt$`97.5%` - rt$`2.5%`) < 1))  ~ "stable/growing slowly"
+  )
+  rt
+}
