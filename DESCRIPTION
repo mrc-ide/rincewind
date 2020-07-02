@@ -14,4 +14,8 @@ LazyData: true
 Imports: 
     purrr,
     tibble,
-    tidyr
+    tidyr,
+    ggdist,
+    dplyr,
+    ggplot2
+RoxygenNote: 7.0.2
