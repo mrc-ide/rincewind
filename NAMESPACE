@@ -2,3 +2,4 @@
 
 export(plot_projections)
 import(ggdist)
+import(ggplot2)
