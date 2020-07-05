@@ -1,7 +1,5 @@
-## outouts is a matrix of size N X T.
-## weights should be a vector of the same length as the number of
-## samples in outputs. That is there is a probability associated with
-## each elemnt
+##' @author Sangeeta Bhatia
+##' @export
 pool_predictions_weighted <- function(outputs, weights, nsim = 10000) {
   models <- names(weights)
   ## Sample model with weights
@@ -35,6 +33,7 @@ pool_predictions_weighted <- function(outputs, weights, nsim = 10000) {
 ## to the 2 serial intervals being considered.
 ## it is this last list (country, 2 components) that is passed to
 ## this function.
+##' @export
 extract_predictions_qntls <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
   names(y) <- paste0("si_", seq_along(y))
   out <- purrr::map_dfr(
@@ -52,7 +51,7 @@ extract_predictions_qntls <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)
   out
 }
 
-
+##' @export
 daily_to_weekly <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
   names(y) <- paste0("si_", seq_along(y))
   out <- purrr::map_dfr(
@@ -85,7 +84,7 @@ daily_to_weekly <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
   out
 }
 
-
+##' @export
 assign_epidemic_phase <- function(rt) {
 
   rt$phase <- dplyr::case_when(
