@@ -97,3 +97,31 @@ assign_epidemic_phase <- function(rt) {
   )
   rt
 }
+
+##' Check if two intervals overlap
+##'
+##'
+##'
+##' @param x1 a numeric vector of length 2
+##' @param x2 a numeric vector of length 2
+##' @return TRUE if x1 and x2 overlap
+##' @author Sangeeta Bhatia
+overlaps <- function(x1, x2) {
+
+  low1 <- floor(min(x1))
+  high1 <- ceiling(max(x1))
+  interval1 <- seq(low1, high1, by = 0.1)
+
+  low2 <- floor(min(x2))
+  high2 <- ceiling(max(x2))
+  interval2 <- seq(low2, high2, by = 0.1)
+
+  common <- intersect(interval1, interval2)
+  ## if the two intervals only overlap on the edge, we want to say
+  ## they don't overlap.
+  overlap <- length(common) > 1
+
+  overlap
+
+
+}
