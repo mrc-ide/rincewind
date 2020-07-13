@@ -106,6 +106,7 @@ assign_epidemic_phase <- function(rt) {
 ##' @param x2 a numeric vector of length 2
 ##' @return TRUE if x1 and x2 overlap
 ##' @author Sangeeta Bhatia
+##' @export
 overlaps <- function(x1, x2) {
 
   low1 <- floor(min(x1))

@@ -3,6 +3,7 @@
 export(assign_epidemic_phase)
 export(daily_to_weekly)
 export(extract_predictions_qntls)
+export(overlaps)
 export(plot_projections)
 export(pool_predictions_weighted)
 import(ggdist)
