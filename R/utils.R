@@ -126,3 +126,50 @@ overlaps <- function(x1, x2, digits) {
 
   overlap
 }
+
+
+
+##' Convert time-series to incidence object
+##'
+##' incidence package accepts a linelist like object (list of dates)
+##' and converts them into an incid object, which is needed by
+##' projections package. To use projections package with a time-series
+##' we convert time-series object into incid object.
+##'
+##' @param ts
+##' @param date_col
+##' @param case_col
+##' @return
+##' @author Sangeeta Bhatia
+##' @export
+ts_to_incid <- function(ts, date_col, case_col) {
+
+  first_date <- min(ts[[date_col]])
+  last_date <- max(ts[[date_col]])
+  x <- tidyr::uncount(ts, weights = ts[[case_col]])
+  out <- incidence::incidence(
+    x[[date_col]],
+    first_date = first_date,
+    last_date = last_date
+  )
+  out
+}
+
+##' Cap predictions to twice the observed for visualisation
+##'
+##'
+##'
+##' @param pred
+##' @return data.frame with capped predictions
+##' @author Sangeeta Bhatia
+##' @export
+cap_predictions <- function(pred) {
+
+  x <- split(pred, pred$country)
+  purrr::map_dfr(x, function(y) {
+    ymax <- 2 * ceiling(max(y$deaths, na.rm = TRUE) / 10) * 10
+    y$`50%`[y$`50%` > ymax] <- NA
+    dplyr::mutate_if(y, is.numeric, ~ ifelse(.x > ymax, ymax, .x))
+  }
+ )
+}
