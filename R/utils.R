@@ -104,18 +104,20 @@ assign_epidemic_phase <- function(rt) {
 ##'
 ##' @param x1 a numeric vector of length 2
 ##' @param x2 a numeric vector of length 2
+##' @param digits integer indicating the number of decimal places
+##' to be used
 ##' @return TRUE if x1 and x2 overlap
 ##' @author Sangeeta Bhatia
 ##' @export
-overlaps <- function(x1, x2) {
+overlaps <- function(x1, x2, digits) {
 
-  low1 <- floor(min(x1))
-  high1 <- ceiling(max(x1))
-  interval1 <- seq(low1, high1, by = 0.1)
+  low1 <- round(min(x1), digits = digits)
+  high1 <- round(max(x1), digits = digits)
+  interval1 <- seq(low1, high1, by = 10^(-digits))
 
-  low2 <- floor(min(x2))
-  high2 <- ceiling(max(x2))
-  interval2 <- seq(low2, high2, by = 0.1)
+  low2 <- round(min(x2), digits = digits)
+  high2 <- round(max(x2), digits = digits)
+  interval2 <- seq(low2, high2, by = 10^(-digits))
 
   common <- intersect(interval1, interval2)
   ## if the two intervals only overlap on the edge, we want to say
@@ -123,6 +125,4 @@ overlaps <- function(x1, x2) {
   overlap <- length(common) > 1
 
   overlap
-
-
 }
