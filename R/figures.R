@@ -45,7 +45,7 @@ theme_manuscript <- function(base_size = 11,
       axis.title.y = element_text(size = base_size),
       axis.text.y = element_text(size = base_size),
       legend.title = element_blank(),
-      legend.text = element_text(size = font_size)
+      legend.text = element_text(size = base_size)
     )
 }
 
