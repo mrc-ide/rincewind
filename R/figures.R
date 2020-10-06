@@ -32,3 +32,57 @@ plot_projections <- function(obs, pred) {
 
   p
 }
+
+##' @export
+theme_manuscript <- function(base_size = 11,
+                             base_family = "",
+                             base_line_size = base_size/22,
+                             base_rect_size = base_size/22) {
+
+  theme_minimal() %+replace%
+    theme(
+      axis.title.x = element_text(size = base_size, angle = 90),
+      axis.title.y = element_text(size = base_size),
+      axis.text.y = element_text(size = base_size),
+      legend.title = element_blank(),
+      legend.text = element_text(size = font_size)
+    )
+}
+
+##' @export
+save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
+
+  if (one_col) {
+    name <- glue("1col_{filename}")
+    ggsave(
+      filename = name, plot = plot, width = 5.2, height = 6.1,
+      unit = "in", dpi = 300, compression = "lzw"
+    )
+  }
+  if (two_col) {
+    name <- glue("2col_{filename}")
+    ggsave(
+      filename = name, plot = plot, width = 7.45, height = 8.7,
+      unit = "in", dpi = 300, compression = "lzw"
+    )
+  }
+}
+
+##' @export
+continent_colorscale <- function() {
+
+  c(
+    "Africa" = "#000000", "Asia" = "#E69F00", "Europe" = "#56B4E9",
+    "North America" = "#009E73", "South America" = "#0072B2",
+    "Oceania" = "#D55E00"
+  )
+}
+
+##' @export
+alternating_palette <- function(x, col1 = "#3d2115", col2 = "#8e4d31") {
+
+  palette <- rep(c(col1, col2), 2 * length(x))
+  palette <- setNames(palette[1:length(x)], x)
+  palette
+
+}

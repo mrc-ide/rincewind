@@ -4,12 +4,15 @@
 \alias{overlaps}
 \title{Check if two intervals overlap}
 \usage{
-overlaps(x1, x2)
+overlaps(x1, x2, digits)
 }
 \arguments{
 \item{x1}{a numeric vector of length 2}
 
 \item{x2}{a numeric vector of length 2}
+
+\item{digits}{integer indicating the number of decimal places
+to be used}
 }
 \value{
 TRUE if x1 and x2 overlap
