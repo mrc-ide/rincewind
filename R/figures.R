@@ -65,6 +65,11 @@ save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
       filename = name, plot = plot, width = 7.45, height = 8.7,
       unit = "in", dpi = 300, compression = "lzw"
     )
+    name <- glue("2col_wider_{filename}")
+    ggsave(
+      filename = name, plot = plot, width = 7.45, height = 4.7,
+      unit = "in", dpi = 300, compression = "lzw"
+    )
   }
 }
 
