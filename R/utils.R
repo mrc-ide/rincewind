@@ -173,3 +173,12 @@ cap_predictions <- function(pred) {
   }
  )
 }
+
+
+##' @export
+nice_country_name <- function(x) snakecase::to_title_case(as.character(x))
+
+##' @export
+round_and_format <- function(x, digits = 2) {
+  format(round(x, digits), nsmall = digits)
+}
