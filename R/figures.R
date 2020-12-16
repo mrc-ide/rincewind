@@ -108,16 +108,19 @@ scale_date_manuscript <- function(date_breaks, date_labels) {
 restimates_linegraph <- function(df, group_var, date_breaks = "1 month",
                                  date_labels = "%d - %b") {
   group_var <- enquo(group_var)
-  p <- ggplot(df) +
+  p <- ggplot() +
     geom_ribbon(
+      data = df,
       aes(x = dates, ymin = `2.5%`, ymax = `97.5%`,
-          group = !! group_var, fill = "black"
-          ),
+          group = !! group_var, fill = "black"),
       alpha = 0.3
     ) +
     geom_line(
-      aes(dates, `50%`, group = !! group_var, linetype = "solid")) +
+      data = df,
+      aes(dates, `50%`, group = !! group_var, linetype = "solid")
+    ) +
     geom_hline(yintercept = 1, linetype = "dashed", col = "red") +
+    expand_limits(y = 0) +
     scale_date_manuscript(date_breaks, date_labels) +
     scale_fill_identity(
       breaks = "black", labels = "95% CrI", guide = "legend"
