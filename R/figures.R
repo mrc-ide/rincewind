@@ -52,20 +52,22 @@ theme_manuscript <- function(base_size = 11,
 ##' @export
 save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
 
+  dir <- dirnames(filename)
+  filename <- basename(filename)
   if (one_col) {
-    name <- glue("1col_{filename}")
+    name <- glue("{dir}/1col_{filename}")
     ggsave(
       filename = name, plot = plot, width = 5.2, height = 6.1,
       unit = "in", dpi = 300, compression = "lzw"
     )
   }
   if (two_col) {
-    name <- glue("2col_{filename}")
+    name <- glue("{dir}/2col_{filename}")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 8.7,
       unit = "in", dpi = 300, compression = "lzw"
     )
-    name <- glue("2col_wider_{filename}")
+    name <- glue("{dir}/2col_wider_{filename}")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 4.7,
       unit = "in", dpi = 300, compression = "lzw"
@@ -90,4 +92,46 @@ alternating_palette <- function(x, col1 = "#3d2115", col2 = "#8e4d31") {
   palette <- setNames(palette[1:length(x)], x)
   palette
 
+}
+
+##' Defines a date scale to be used for all figures.
+##' @param date_breaks breaks for x-axis, Defaults to 1 month
+##' @param date_labels labels, default is day-month
+##' @export
+scale_date_manuscript <- function(date_breaks, date_labels) {
+  scale_x_date(date_breaks = date_breaks, date_labels)
+}
+
+##'
+##'
+##'
+##' @title Rt quantile plot
+##' @param df data.frame of quantiles for Rt. Columns should be called
+##' dates, `2.5%`, `97.5%` and `50%`
+##' @param group_var variable to group by; forecast_date or
+##' forecast_week
+##' @return ggplot2 object
+##' @author Sangeeta Bhatia
+##' @export
+restimates_linegraph <- function(df, group_var, date_breaks = "1 month",
+                                 date_labels = "%d - %b") {
+
+  p <- ggplot(df) +
+    geom_ribbon(
+      aes(x = dates, ymin = `2.5%`, ymax = `97.5%`,
+          group = !! group_var, fill = "black"
+          ),
+      alpha = 0.3
+    ) +
+    geom_line(
+      aes(dates, `50%`, group = !! group_var, linetype = "solid")) +
+    geom_hline(yintercept = 1, linetype = "dashed", col = "red") +
+    scale_date_manuscript(date_breaks, date_labels) +
+    scale_fill_identity(
+      breaks = "black", labels = "95% CrI", guide = "legend"
+    ) +
+    scale_linetype_identity(
+      breaks = "solid", labels = "Median", guide = "legend"
+    )
+  p
 }

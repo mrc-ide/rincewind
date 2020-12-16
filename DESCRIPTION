@@ -19,5 +19,6 @@ Imports:
     dplyr,
     ggplot2,
     incidence,
-    glue
+    glue,
+    rlang
 RoxygenNote: 7.1.1
