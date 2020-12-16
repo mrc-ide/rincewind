@@ -99,23 +99,15 @@ alternating_palette <- function(x, col1 = "#3d2115", col2 = "#8e4d31") {
 ##' @param date_labels labels, default is day-month
 ##' @export
 scale_date_manuscript <- function(date_breaks, date_labels) {
-  scale_x_date(date_breaks = date_breaks, date_labels)
+  scale_x_date(date_breaks = date_breaks, date_labels = date_labels)
 }
 
-##'
-##'
-##'
-##' @title Rt quantile plot
-##' @param df data.frame of quantiles for Rt. Columns should be called
-##' dates, `2.5%`, `97.5%` and `50%`
-##' @param group_var variable to group by; forecast_date or
-##' forecast_week
-##' @return ggplot2 object
-##' @author Sangeeta Bhatia
+
 ##' @export
+##' @examples restimates_linegraph(df, forecast_date)
 restimates_linegraph <- function(df, group_var, date_breaks = "1 month",
                                  date_labels = "%d - %b") {
-
+  group_var <- enquo(group_var)
   p <- ggplot(df) +
     geom_ribbon(
       aes(x = dates, ymin = `2.5%`, ymax = `97.5%`,
