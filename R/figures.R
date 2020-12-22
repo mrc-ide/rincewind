@@ -52,7 +52,7 @@ theme_manuscript <- function(base_size = 11,
 ##' @export
 save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
 
-  dir <- dirnames(filename)
+  dir <- dirname(filename)
   filename <- basename(filename)
   if (one_col) {
     name <- glue("{dir}/1col_{filename}")
