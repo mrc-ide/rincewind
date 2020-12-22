@@ -143,8 +143,7 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
     ) +
     geom_line(
       data = pred,
-      aes(x = date, `50%`, group = !! group_var, col = "#50a0fa"),
-      size = 1.1
+      aes(x = date, `50%`, group = !! group_var, col = "#50a0fa")
     ) +
     geom_ribbon(
       data = pred,
