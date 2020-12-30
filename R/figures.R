@@ -139,7 +139,8 @@ restimates_linegraph <- function(df, group_var,
 
 ##' @export
 all_forecasts_calendar <- function(obs, pred, date_breaks,
-                                   date_labels, group_var) {
+                                   date_labels, group_var,
+                                   xmin = "2020-03-01") {
 
   group_var <- enquo(group_var)
   ggplot() +
@@ -158,7 +159,7 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
       ),
       alpha = 0.4
     ) +
-    scale_date_manuscript(date_breaks, date_labels) +
+    scale_date_manuscript(date_breaks, date_labels, xmin) +
     scale_shape_identity(
       breaks = 16, labels = "Obs deaths",
       guide = guide_legend(order = 1)
