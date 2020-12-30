@@ -98,15 +98,20 @@ alternating_palette <- function(x, col1 = "#3d2115", col2 = "#8e4d31") {
 ##' @param date_breaks breaks for x-axis, Defaults to 1 month
 ##' @param date_labels labels, default is day-month
 ##' @export
-scale_date_manuscript <- function(date_breaks, date_labels) {
-  scale_x_date(date_breaks = date_breaks, date_labels = date_labels)
+scale_date_manuscript <- function(date_breaks, date_labels, xmin) {
+  scale_x_date(
+    date_breaks = date_breaks, date_labels = date_labels,
+    limits = c(as.Date(xmin), NA)
+  )
 }
 
 
 ##' @export
 ##' @examples restimates_linegraph(df, forecast_date)
-restimates_linegraph <- function(df, group_var, date_breaks = "1 month",
-                                 date_labels = "%d - %b") {
+restimates_linegraph <- function(df, group_var,
+                                 date_breaks = "1 month",
+                                 date_labels = "%d - %b",
+                                 xmin = "2020-03-01") {
   group_var <- enquo(group_var)
   p <- ggplot() +
     geom_ribbon(
@@ -121,7 +126,7 @@ restimates_linegraph <- function(df, group_var, date_breaks = "1 month",
     ) +
     geom_hline(yintercept = 1, linetype = "dashed", col = "red") +
     expand_limits(y = 0) +
-    scale_date_manuscript(date_breaks, date_labels) +
+    scale_date_manuscript(date_breaks, date_labels, xmin) +
     scale_fill_identity(
       breaks = "black", labels = "95% CrI", guide = "legend"
     ) +
