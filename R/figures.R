@@ -139,17 +139,17 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
   group_var <- enquo(group_var)
   ggplot() +
     geom_point(
-      data = obs, aes(dates, deaths, shape = 16), alpha = 0.7
+      data = obs, aes(dates, deaths, shape = 16), alpha = 0.5
     ) +
     geom_line(
       data = pred,
-      aes(x = date, `50%`, group = !! group_var, col = "#50a0fa")
+      aes(x = date, `50%`, group = !! group_var, col = "#4a8c6f")
     ) +
     geom_ribbon(
       data = pred,
       aes(
         x = date, ymin = `2.5%`, ymax = `97.5%`, group = !! group_var,
-        fill = "#9ac8fc"
+        fill = "#4a8c6f"
       ),
       alpha = 0.4
     ) +
@@ -159,11 +159,11 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
       guide = guide_legend(order = 1)
     ) +
     scale_color_identity(
-      breaks = "#50a0fa", labels = "Median",
+      breaks =  "#4a8c6f", labels = "Median",
       guide = guide_legend(order = 2)
     ) +
     scale_fill_identity(
-      breaks = "#9ac8fc", labels = "95% CrI",
+      breaks = "#4a8c6f", labels = "95% CrI",
       guide = guide_legend(order = 3)
     ) +
     ggtitle(label = nice_country_name(obs$country[1]))
