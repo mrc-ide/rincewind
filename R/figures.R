@@ -151,7 +151,7 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
         x = date, ymin = `2.5%`, ymax = `97.5%`, group = !! group_var,
         fill = "#9ac8fc"
       ),
-      alpha = 0.5
+      alpha = 0.4
     ) +
     scale_date_manuscript(date_breaks, date_labels) +
     scale_shape_identity(
