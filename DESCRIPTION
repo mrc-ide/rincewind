@@ -1,6 +1,6 @@
 Package: rincewind
 Title: Utilities for processing forecasts matrices
-Version: 1.0.5
+Version: 1.1.0
 Authors@R: 
     person(given = "Sangeeta",
            family = "Bhatia",
@@ -20,5 +20,8 @@ Imports:
     ggplot2,
     incidence,
     glue,
-    rlang
+    rlang,
+    snakecase
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)

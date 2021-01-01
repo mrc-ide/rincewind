@@ -4,7 +4,7 @@
 \alias{scale_date_manuscript}
 \title{Defines a date scale to be used for all figures.}
 \usage{
-scale_date_manuscript(date_breaks, date_labels)
+scale_date_manuscript(date_breaks, date_labels, xmin)
 }
 \arguments{
 \item{date_breaks}{breaks for x-axis, Defaults to 1 month}

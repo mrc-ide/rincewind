@@ -176,7 +176,7 @@ cap_predictions <- function(pred) {
 
 
 ##' @export
-nice_country_name <- function(x) snakecase::to_title_case(as.character(x))
+nice_country_name <- function(x) to_title_case(as.character(x))
 
 ##' @export
 round_and_format <- function(x, digits = 2) {
@@ -200,4 +200,15 @@ deaths_threshold <- function(ts,
   th3 <- sum(ts$Deaths) >= 100
 
   th1 & th2 & th3
+}
+
+##' @export
+##' @param data data.frame that has a column listing countries
+##' @param country_col name of the column that has country names
+country_to_continent <- function(data, country_col) {
+
+  merge(
+    data, country_continent_mapping, by.x = country_col,
+    by.y = "Countries and territories"
+  )
 }
