@@ -1,3 +1,35 @@
+##' Customise plots to be aligned in rows in the manuscript
+##'
+##' @details The very first plot will have legend but no x-axis text;
+##' all plots in the middle will
+##' have no legend and no x-axis text, and the very last plot will have
+##' no legend but x-axis text
+##' @param plots list of ggplot2 objects
+##' @param in_rows list of indices of plots that will be put in rows
+##' @export
+customise_for_rows <- function(plots, in_rows) {
+  indices <- seq_along(plots)
+
+  imap(
+    plots, function(p, row) {
+      if (row == min(in_rows)) {
+        ## First row
+        p <- p + theme(axis.text.x = element_blank())
+      } else if (row == max(in_rows)) {
+        ## Last row
+        p <- p + theme(legend.position = "none")
+      } else if (row %in% in_rows) {
+        ## Middle
+        p <- p +
+          theme(
+            legend.position = "none", axis.text.x = element_blank()
+          )
+      }
+      p
+    }
+  )
+}
+
 ##' Projections plot
 ##'
 ##'
