@@ -1,6 +1,6 @@
 Package: rincewind
 Title: Utilities for processing forecasts matrices
-Version: 1.2.0
+Version: 1.3.0
 Authors@R: 
     person(given = "Sangeeta",
            family = "Bhatia",
@@ -11,17 +11,18 @@ Description: This package contains utility functions for processing forecasts ma
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    purrr,
-    tibble,
-    tidyr,
-    ggdist,
+Imports:
     dplyr,
+    ggdist,
     ggplot2,
+    glue,    
     incidence,
-    glue,
+    purrr,
     rlang,
-    snakecase
+    snakecase,
+    slider,
+    tibble,
+    tidyr
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
