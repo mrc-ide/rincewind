@@ -8,9 +8,7 @@ age_wtd_ifr(locations)
 }
 \arguments{
 \item{locations}{list of country names. Note that no checks have
-been implemented to test that the country names are valid.
-Use names as in ECDC COVID-19 data, so United_Kingdom instead of
-any other variation.}
+been implemented to test that the country names are valid.}
 }
 \value{
 a named list with samples from age-weighted IFR for each
