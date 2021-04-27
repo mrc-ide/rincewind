@@ -193,15 +193,15 @@ all_forecasts_calendar <- function(obs, pred, date_breaks,
     ) +
     scale_date_manuscript(date_breaks, date_labels, xmin) +
     scale_shape_identity(
-      breaks = 16, labels = "Obs deaths",
+      breaks = 16, labels = "Observed deaths",
       guide = guide_legend(order = 1)
     ) +
     scale_color_identity(
-      breaks =  "#4a8c6f", labels = "Median",
+      breaks =  "#4a8c6f", labels = "Median forecasts",
       guide = guide_legend(order = 2)
     ) +
     scale_fill_identity(
-      breaks = "#4a8c6f", labels = "95% CrI",
+      breaks = "#4a8c6f", labels = "95% CrI of forecasts",
       guide = guide_legend(order = 3)
     ) +
     ggtitle(label = nice_country_name(obs$country[1]))
