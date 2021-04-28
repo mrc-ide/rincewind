@@ -86,23 +86,31 @@ save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
 
   dir <- dirname(filename)
   filename <- basename(filename)
+  extension <- strsplit(basename(filename), split="\\.")[[1]][-1]
   if (one_col) {
     name <- glue("{dir}/1col_{filename}")
-    ggsave(
-      filename = name, plot = plot, width = 5.2, height = 6.1,
-      unit = "in", dpi = 300, compression = "lzw"
-    )
+    if (extension == "tiff") {
+      ggsave(
+        filename = name, plot = plot, width = 5.2, height = 6.1,
+        unit = "in", dpi = 300, compression = "lzw"
+      )
+    } else {
+      ggsave(
+        filename = name, plot = plot, width = 5.2, height = 6.1,
+        unit = "in"
+      )
+    }
   }
   if (two_col) {
     name <- glue("{dir}/2col_{filename}")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 8.7,
-      unit = "in", dpi = 300, compression = "lzw"
+      unit = "in"
     )
     name <- glue("{dir}/2col_wider_{filename}")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 4.7,
-      unit = "in", dpi = 300, compression = "lzw"
+      unit = "in"
     )
   }
 }
