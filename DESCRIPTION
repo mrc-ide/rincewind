@@ -1,6 +1,6 @@
 Package: rincewind
 Title: Utilities for processing forecasts matrices
-Version: 1.3.1
+Version: 1.4
 Authors@R: 
     person(given = "Sangeeta",
            family = "Bhatia",
@@ -12,6 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    assessr, 
     dplyr,
     ggdist,
     ggplot2,
