@@ -7,6 +7,7 @@
 ##' @param plots list of ggplot2 objects
 ##' @param in_rows list of indices of plots that will be put in rows
 ##' @export
+##' @importFrom purrr imap
 customise_for_rows <- function(plots, in_rows) {
   indices <- seq_along(plots)
 
@@ -58,7 +59,7 @@ plot_projections <- function(obs, pred) {
     scale_fill_brewer(palette = "Greens") +
     scale_x_date(limits = c(as.Date("2020-03-01"), NA)) +
     ##ggplot2::geom_vline(xintercept = xintercept, linetype = "dashed") +
-    theme_minimal() +
+    theme_classic() +
     xlab("") + ylab("Deaths") +
     theme(legend.position = "none")
 
@@ -66,12 +67,12 @@ plot_projections <- function(obs, pred) {
 }
 
 ##' @export
-theme_manuscript <- function(base_size = 11,
+theme_manuscript <- function(base_size = 12,
                              base_family = "",
                              base_line_size = base_size/22,
                              base_rect_size = base_size/22) {
 
-  theme_minimal() %+replace%
+  theme_classic() %+replace%
     theme(
       axis.title.x = element_text(size = base_size, angle = 90),
       axis.title.y = element_text(size = base_size),
@@ -82,42 +83,53 @@ theme_manuscript <- function(base_size = 11,
 }
 
 ##' @export
+##' @param filename provide fully quanlified filename without the
+##' extension e.g. "figures/test". This function will then save
+##' figures/save.png and figures/test.pdf
 save_multiple <- function(plot, filename, one_col = TRUE, two_col = TRUE) {
 
   dir <- dirname(filename)
   filename <- basename(filename)
-  extension <- strsplit(basename(filename), split="\\.")[[1]][-1]
   if (one_col) {
-    name <- glue("{dir}/1col_{filename}")
-    if (extension == "tiff") {
-      ggsave(
-        filename = name, plot = plot, width = 5.2, height = 6.1,
-        unit = "in", dpi = 300, compression = "lzw"
-      )
-    } else {
-      ggsave(
-        filename = name, plot = plot, width = 5.2, height = 6.1,
-        unit = "in"
-      )
-    }
+    name <- glue("{dir}/1col_{filename}.png")
+    ggsave(
+      filename = name, plot = plot, width = 5.2, height = 6.1,
+      units = "in", dpi = 300
+    )
+    name <- glue("{dir}/1col_{filename}.pdf")
+    ggsave(
+      filename = name, plot = plot, width = 5.2, height = 6.1,
+      units = "in", dpi = 300
+    )
   }
+
   if (two_col) {
-    name <- glue("{dir}/2col_{filename}")
+    name <- glue("{dir}/2col_{filename}.png")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 8.7,
-      unit = "in"
+      units = "in"
     )
-    name <- glue("{dir}/2col_wider_{filename}")
+    name <- glue("{dir}/2col_wider_{filename}.png")
     ggsave(
       filename = name, plot = plot, width = 7.45, height = 4.7,
-      unit = "in"
+      units = "in"
+    )
+
+    name <- glue("{dir}/2col_{filename}.pdf")
+    ggsave(
+      filename = name, plot = plot, width = 7.45, height = 8.7,
+      units = "in"
+    )
+    name <- glue("{dir}/2col_wider_{filename}.pdf")
+    ggsave(
+      filename = name, plot = plot, width = 7.45, height = 4.7,
+      units = "in"
     )
   }
 }
 
 ##' @export
 continent_colorscale <- function() {
-
   c(
     "Africa" = "#000000", "Asia" = "#E69F00", "Europe" = "#56B4E9",
     "North America" = "#009E73", "South America" = "#0072B2",
