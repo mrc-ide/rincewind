@@ -86,7 +86,6 @@ daily_to_weekly <- function(y, prob = c(0.025, 0.25, 0.5, 0.75, 0.975)) {
 
 ##' @export
 assign_epidemic_phase <- function(rt) {
-
   rt$phase <- dplyr::case_when(
     rt$`97.5%` < 1 ~ "decline",
     (rt$`97.5%` - rt$`2.5%` > 1)  ~ "unclear",
@@ -96,6 +95,26 @@ assign_epidemic_phase <- function(rt) {
      ((rt$`97.5%` - rt$`2.5%`) < 1))  ~ "stable/growing slowly"
   )
   rt
+}
+##' Assign epidemic phase
+##'
+##' Use Epinow definitions
+##'
+##' @param rt a vector of samples from the
+##' posterior distribution
+##' @return phase
+##' @author Sangeeta Bhatia
+##' @export
+assign_epidemic_phase2 <- function(rt) {
+  less_than_1 <- 100 * (length(which(rt < 1)) / length(rt))
+  more_than_1 <- 100 * length(which(rt >= 1))/ length(rt)
+  ## set to default value and let it be updated
+  phase <- "indeterminate"
+  if (less_than_1 < 5) phase <- "definitely growing"
+  else if (less_than_1 < 20) phase <- "likely growing"
+  if (more_than_1 < 5) phase <- "definitely decreasing"
+  else if (more_than_1 < 20) phase <- "likely decreasing"
+  phase
 }
 
 ##' Check if two intervals overlap
