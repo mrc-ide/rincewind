@@ -195,7 +195,18 @@ cap_predictions <- function(pred) {
 
 
 ##' @export
-nice_country_name <- function(x) snakecase::to_title_case(as.character(x))
+##' @importFrom snakecase to_title_case
+nice_country_name <- function(x) {
+  out <- snakecase::to_title_case(as.character(x))
+  if (out == "Bosnia and Herzegovina") out <- "Bosnia-Herz'"
+  if (out == "Dominican Republic") out <- "D Republic"
+  if (out == "North Macedonia") out <- "N Macedonia"
+  if (out == "South Africa") out <- "S Africa"
+  if (out == "South Korea") out <- "S Korea"
+  if (out == "United States of America") out <- "USA"
+  if (out == "United Kingdom") out <- "UK"
+  out
+}
 
 ##' @export
 round_and_format <- function(x, digits = 2) {
