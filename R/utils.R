@@ -198,13 +198,13 @@ cap_predictions <- function(pred) {
 ##' @importFrom snakecase to_title_case
 nice_country_name <- function(x) {
   out <- snakecase::to_title_case(as.character(x))
-  if (out == "Bosnia and Herzegovina") out <- "Bosnia-Herz'"
-  if (out == "Dominican Republic") out <- "D Republic"
-  if (out == "North Macedonia") out <- "N Macedonia"
-  if (out == "South Africa") out <- "S Africa"
-  if (out == "South Korea") out <- "S Korea"
-  if (out == "United States of America") out <- "USA"
-  if (out == "United Kingdom") out <- "UK"
+  out[out == "Bosnia and Herzegovina"] <- "Bosnia-Herz'"
+  out[out == "Dominican Republic"] <- "D Republic"
+  out[out == "North Macedonia"] <- "N Macedonia"
+  out[out == "South Africa"] <- "S Africa"
+  out[out == "South Korea"] <- "S Korea"
+  out[out == "United States of America"] <- "USA"
+  out[out == "United Kingdom"] <- "UK"
   out
 }
 
