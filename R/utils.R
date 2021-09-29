@@ -112,6 +112,7 @@ assign_epidemic_phase2 <- function(rt) {
   phase <- "indeterminate"
   if (less_than_1 < 5) phase <- "definitely growing"
   else if (less_than_1 < 20) phase <- "likely growing"
+  else if (less_than_1 < 60) phase <- "likely stable"
   if (more_than_1 < 5) phase <- "definitely decreasing"
   else if (more_than_1 < 20) phase <- "likely decreasing"
   phase
