@@ -116,7 +116,7 @@ assign_epidemic_phase2 <- function(rt) {
   if (25 <= less_than_1 & less_than_1 < 75 & width > threshold) phase <- "indeterminate"
   if (75 <= less_than_1 & less_than_1 < 95) phase <- "likely decreasing"
   if (95 <= less_than_1) phase <- "definitely decreasing"
-  list(phase = phase, less_than_1 = less_than_1, cv = cv)
+  list(phase = phase, less_than_1 = less_than_1, cv = width)
 }
 
 ##' Check if two intervals overlap
