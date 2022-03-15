@@ -1,6 +1,6 @@
 Package: rincewind
 Title: Utilities for processing forecasts matrices
-Version: 1.4.4
+Version: 1.4.5
 Authors@R: 
     person(given = "Sangeeta",
            family = "Bhatia",

@@ -108,12 +108,14 @@ assign_epidemic_phase <- function(rt) {
 assign_epidemic_phase2 <- function(rt) {
   less_than_1 <- 100 * (length(which(rt < 1)) / length(rt))
   phase <- NA
+  cv <- sd(rt) / mean(rt)
+  threshold <- 0.5
   if (less_than_1 < 5) phase <- "definitely growing"
-  if (5 <= less_than_1 & less_than_1 < 30) phase <- "likely growing"
-  if (30 <= less_than_1 & less_than_1 < 55) phase <- "likely stable"
-  if (55 <= less_than_1 & less_than_1 < 60) phase <- "indeterminate"
-  if (60 <= less_than_1 & less_than_1 < 85) phase <- "likely decreasing"
-  if (85 <= less_than_1) phase <- "definitely decreasing"
+  if (5 <= less_than_1 & less_than_1 < 25) phase <- "likely growing"
+  if (25 <= less_than_1 & less_than_1 < 75 & cv < threshold) phase <- "likely stable"
+  if (25 <= less_than_1 & less_than_1 < 75 & cv > threshold) phase <- "indeterminate"
+  if (75 <= less_than_1 & less_than_1 < 95) phase <- "likely decreasing"
+  if (95 <= less_than_1) phase <- "definitely decreasing"
   phase
 }
 
