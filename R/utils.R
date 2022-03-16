@@ -109,7 +109,7 @@ assign_epidemic_phase2 <- function(rt) {
   less_than_1 <- 100 * (length(which(rt < 1)) / length(rt))
   phase <- NA
   width <- quantile(rt, 0.975) - quantile(rt, 0.025)
-  threshold <- 1
+  threshold <- 0.5
   if (less_than_1 < 5) phase <- "definitely growing"
   if (5 <= less_than_1 & less_than_1 < 25) phase <- "likely growing"
   if (25 <= less_than_1 & less_than_1 < 75 & width < threshold) phase <- "likely stable"
